@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>حسابي</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family:"Segoe UI",sans-serif;background:#eef2ff;color:#333;direction:rtl}
+    .topbar{display:flex;align-items:center;background:#000DFF;color:#fff;padding:1rem}
+    .topbar h1{flex:1;text-align:center;font-size:1.5rem}
+    .topbar button{background:transparent;color:#fff;font-size:1.25rem;border:none;cursor:pointer}
+    .account{padding:2rem;padding-bottom:6rem;text-align:center}
+    .account p{margin:.5rem 0;display:flex;align-items:center;justify-content:center;gap:.5rem;font-size:1rem}
+    .account p i{color:#000DFF}
+    .stats{display:flex;justify-content:space-around;margin-top:2rem}
+    .stats div{text-align:center}
+    .stats div i{font-size:1.5rem;color:#000DFF;margin-bottom:.5rem}
+    .stats div strong{display:block;font-size:1.25rem;margin-bottom:.25rem}
+    .stats div span{font-size:.9rem;color:#555}
+    .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:.75rem 0;box-shadow:0 -2px 6px rgba(0,0,0,0.1)}
+    .bottom-nav a{display:flex;flex-direction:column;align-items:center;font-size:.85rem;color:#666}
+    .bottom-nav a.active{color:#000DFF;font-weight:bold}
+    .bottom-nav a i{font-size:1.25rem;margin-bottom:.25rem}
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <button id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i></button>
+    <h1>حسابي</h1>
+  </header>
+
+  <main class="account">
+    <p><i class="fa-solid fa-user"></i> <strong id="userName">—</strong></p>
+    <p><i class="fa-solid fa-envelope"></i> <span id="userEmail">—</span></p>
+    <p><i class="fa-solid fa-phone"></i> <span id="userPhone">—</span></p>
+
+    <div class="stats">
+      <div><i class="fa-solid fa-receipt"></i><strong id="ordersCount">0</strong><span>طلباتي</span></div>
+      <div><i class="fa-solid fa-heart"></i><strong id="favoritesCount">0</strong><span>مفضلتي</span></div>
+      <div><i class="fa-solid fa-star"></i><strong id="rating">—</strong><span>تقييمي</span></div>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="home.html"><i class="fa-solid fa-house"></i>الرئيسية</a>
+    <a href="orders.html"><i class="fa-solid fa-receipt"></i>الطلبات</a>
+    <a href="waiting.html"><i class="fa-solid fa-spinner"></i>انتظار</a>
+    <a href="account.html" class="active"><i class="fa-solid fa-user"></i>حسابي</a>
+  </nav>
+
+  <script>
+    // مثال مُبسّط: إذا خزّنت بيانات الحساب في sessionStorage
+    const user = JSON.parse(sessionStorage.getItem('userData')||'{"name":"أحمد","email":"a@b.com","phone":"0999"}');
+    document.getElementById('userName').textContent  = user.name;
+    document.getElementById('userEmail').textContent = user.email;
+    document.getElementById('userPhone').textContent = user.phone;
+    // عدل لتحميل من Firebase إذا أردت
+
+    // إحصائيات وهميّة أو حقيقية
+    document.getElementById('ordersCount').textContent    = JSON.parse(localStorage.getItem('orders')||'[]').length;
+    document.getElementById('favoritesCount').textContent = 0;
+    document.getElementById('rating').textContent         = (Math.random()*2+3).toFixed(1)+'★';
+
+    document.getElementById('logoutBtn').onclick = ()=>{ sessionStorage.clear(); location='login.html'; };
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>تسجيل الدخول</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="centered">
+
+  <div class="card">
+    <h2>تسجيل الدخول</h2>
+    <input id="email"    type="email"    placeholder="البريد الإلكتروني" required>
+    <input id="password" type="password" placeholder="كلمة المرور" required>
+    <button id="loginBtn" class="primary">دخول</button>
+    <p><a href="signup.html">ليس لديك حساب؟ إنشاء حساب</a></p>
+  </div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <script>
+    const auth = firebase.auth();
+
+    document.getElementById('loginBtn').addEventListener('click', () => {
+      const email = document.getElementById('email').value.trim();
+      const pass  = document.getElementById('password').value;
+
+      if (!email || !pass) {
+        alert('يرجى إدخال البريد وكلمة المرور');
+        return;
+      }
+
+      auth.signInWithEmailAndPassword(email, pass)
+        .then(() => {
+          // تسجيل ناجح، انتقل إلى الصفحة الرئيسية
+          window.location.href = 'home.html';
+        })
+        .catch(err => {
+          alert('فشل تسجيل الدخول: ' + err.message);
+        });
+    });
+  </script>
+</body>
+</html>

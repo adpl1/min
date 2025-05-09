@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>إنشاء حساب</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="centered">
+
+  <div class="card">
+    <h2>إنشاء حساب جديد</h2>
+    <input id="name"     type="text"     placeholder="الاسم الكامل" required/>
+    <input id="email"    type="email"    placeholder="البريد الإلكتروني" required/>
+    <input id="phone"    type="tel"      placeholder="رقم الهاتف" required/>
+    <input id="password" type="password" placeholder="كلمة المرور" required/>
+    <input id="confirm"  type="password" placeholder="تأكيد كلمة المرور" required/>
+    <button id="signupBtn" class="primary">إنشاء حساب</button>
+    <p><a href="index.html">هل لديك حساب؟ تسجيل الدخول</a></p>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+  <!-- تهيئة Firebase -->
+  <script src="firebase-config.js"></script>
+
+  <!-- كود إنشاء الحساب -->
+  <script>
+    const auth = firebase.auth();
+    const rdb  = firebase.database();
+
+    document.getElementById('signupBtn').addEventListener('click', () => {
+      const name    = document.getElementById('name').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const phone   = document.getElementById('phone').value.trim();
+      const pass    = document.getElementById('password').value;
+      const confirm = document.getElementById('confirm').value;
+
+      if (!name || !email || !phone || !pass || pass !== confirm) {
+        return alert('تحقق من تعبئة جميع الحقول ومطابقة كلمة المرور');
+      }
+
+      auth.createUserWithEmailAndPassword(email, pass)
+        .then(({ user }) => {
+          return rdb.ref('users/' + user.uid).set({ name, email, phone });
+        })
+        .then(() => {
+          alert('تم إنشاء الحساب بنجاح');
+          window.location.href = 'index.html';
+        })
+        .catch(err => {
+          if (err.code === 'auth/email-already-in-use') {
+            alert('هذا البريد مستخدم بالفعل');
+            window.location.href = 'index.html';
+          } else {
+            alert(err.message);
+          }
+        });
+    });
+  </script>
+</body>
+</html>

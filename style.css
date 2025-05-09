@@ -1,0 +1,300 @@
+/* ==================== Base & Reset ==================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: #eef2ff;
+  direction: rtl;
+  color: #333;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ==================== Utility Classes ==================== */
+.hidden { display: none !important; }
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6B73FF, #000DFF);
+}
+
+/* ==================== Card ==================== */
+.card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+.card h2 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+.card p {
+  margin-top: .75rem;
+}
+.card input {
+  width: 100%;
+  margin: .5rem 0;
+  padding: .75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* ==================== Buttons ==================== */
+button.primary {
+  background: #000DFF;
+  color: #fff;
+  padding: .75rem;
+  border-radius: 6px;
+  width: 100%;
+  margin-top: .5rem;
+  transition: background .3s;
+}
+button.primary:hover {
+  background: #6B73FF;
+}
+button.secondary {
+  background: #4CAF50;
+  color: #fff;
+  padding: .75rem;
+  border-radius: 6px;
+  width: 100%;
+  margin-top: .5rem;
+  transition: background .3s;
+}
+button.secondary:hover {
+  background: #45A049;
+}
+
+/* ==================== Top Bar ==================== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #000DFF;
+  color: #fff;
+  padding: 1rem;
+}
+.topbar .logo,
+.topbar h1 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.btn-logout {
+  background: transparent;
+  color: #fff;
+}
+
+/* ==================== Main Content ==================== */
+.main-content {
+  padding: 1rem;
+  padding-bottom: 4rem; /* space for bottom nav */
+}
+
+/* ==================== Search Bar ==================== */
+.search-bar input {
+  width: 100%;
+  padding: .75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+
+/* ==================== Store List ==================== */
+.horizontal-list {
+  display: flex;
+  overflow-x: auto;
+  gap: .5rem;
+  margin-bottom: 1rem;
+}
+.store-item {
+  background: #fff;
+  padding: .75rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  position: relative;
+  min-width: 100px;
+  text-align: center;
+}
+.store-item.selected {
+  border: 2px solid #000DFF;
+}
+.store-item .heart {
+  position: absolute;
+  top: .5rem;
+  left: .5rem;
+  font-size: 1.2rem;
+  color: #ccc;
+  transition: color .3s;
+}
+.store-item .heart.favorited {
+  color: red;
+}
+
+/* ==================== Order Box ==================== */
+.order-box textarea {
+  width: 100%;
+  padding: .75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: none;
+  height: 100px;
+  margin-bottom: 1rem;
+}
+
+/* ==================== Bottom Navigation ==================== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0; right: 0;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  padding: .75rem 0;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+}
+.bottom-nav .nav-item {
+  font-size: .9rem;
+  color: #666;
+  transition: color .3s;
+}
+.bottom-nav .nav-item.active {
+  color: #000DFF;
+  font-weight: bold;
+}
+
+/* ==================== Orders Page ==================== */
+.orders-list .order-card {
+  background: #fff;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+.order-card h3 {
+  margin-bottom: .5rem;
+}
+.order-card .small {
+  font-size: .8rem;
+  color: #666;
+}
+
+/* ==================== Modal ==================== */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right:0; bottom:0;
+  background: rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
+}
+.modal.hidden {
+  display: none;
+}
+.modal-content {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+}
+.modal-content .close {
+  position: absolute;
+  top: .5rem; right: .75rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ==================== Favorites Page ==================== */
+.favorites-list .favorite-card {
+  background: #fff;
+  padding: .75rem 1rem;
+  margin: .5rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ==================== Account Page ==================== */
+.account-page {
+  text-align: center;
+  padding: 1rem;
+}
+.avatar-dropzone {
+  width: 100px; height: 100px;
+  margin: 1.5rem auto;
+  border: 2px dashed #aaa;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: border-color .3s;
+}
+.avatar-dropzone.hover {
+  border-color: #000DFF;
+}
+.avatar-dropzone input[type="file"] {
+  position: absolute; top:0; left:0;
+  width:100%; height:100%; opacity:0; cursor:pointer;
+}
+.avatar-dropzone img {
+  width:100%; height:100%; object-fit:cover;
+}
+.account-page h2 {
+  margin-top: .5rem;
+}
+.account-page p {
+  margin: .25rem 0;
+  color: #555;
+}
+.stats {
+  display: flex; justify-content: space-around;
+  margin: 1.5rem 0;
+}
+.stats div {
+  text-align: center;
+}
+.stats div strong {
+  display: block;
+  font-size: 1.25rem;
+  color: #000DFF;
+}
+.stats div span {
+  display: block;
+  font-size: .85rem;
+  color: #555;
+}
+
+/* ==================== Signup Page tweaks (reuse card) ==================== */
+body.signup .card {
+  max-width: 360px;
+}
+
+/* ==================== Responsive ==================== */
+@media (max-width: 480px) {
+  .store-item { min-width: 80px; padding: .5rem; }
+  .bottom-nav .nav-item { font-size: .8rem; }
+  .stats { flex-direction: column; gap: .75rem; }
+}

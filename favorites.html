@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <link rel="stylesheet" href="style.css">
+
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>المفضلة</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <h1>المفضلة</h1>
+    <a href="home.html" class="btn-back">⟵ الرئيسية</a>
+  </header>
+  <main class="favorites-list"></main>
+  <nav class="bottom-nav">
+    <a href="home.html" class="nav-item">الرئيسية</a>
+    <a href="orders.html" class="nav-item">الطلبات</a>
+    <a href="favorites.html" class="nav-item active">المفضلة</a>
+    <a href="account.html" class="nav-item">حسابي</a>
+  </nav>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script>
+    const auth = firebase.auth(), db=firebase.firestore(), favEl=document.querySelector('.favorites-list');
+    auth.onAuthStateChanged(user=>{if(!user)location.href='login.html';db.collection('favorites').where('uid','==',user.uid).onSnapshot(snap=>{favEl.innerHTML='';if(snap.empty){favEl.innerHTML='<p class="empty">لم تضف متاجر بعد. <a href="home.html">ابحث الآن</a></p>';return;}snap.forEach(doc=>{const {store}=doc.data();favEl.innerHTML+=`<div class="favorite-card"><span>${store}</span><button onclick="removeFav('${doc.id}')" class="heart favorited">&#10084;</button></div>`;});});});
+    function removeFav(id){db.collection('favorites').doc(id).delete();}
+  </script>
+</body>
+</html>
