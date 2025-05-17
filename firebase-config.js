@@ -1,11 +1,19 @@
 // firebase-config.js
 const firebaseConfig = {
-  apiKey: "AIzaSyC2H29RVbmSd9nzqmcP_e7bBgty3AEdC3I",
-  authDomain: "ssrt-8175a.firebaseapp.com",
-  databaseURL: "https://ssrt-8175a-default-rtdb.firebaseio.com",
-  projectId: "ssrt-8175a",
-  storageBucket: "ssrt-8175a.appspot.com",
-  messagingSenderId: "495122733304",
-  appId: "1:495122733304:android:f703b8a1c99618b3e5830d"
+// firebase-config.js
+// إذا كنت تستخدم ES Modules:
+export const firebaseConfig = {
+  apiKey:   import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain:   import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId:    import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket:import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId:            import.meta.env.VITE_FIREBASE_APP_ID,
+};
+
+// ثم تهيئة Firebase:
+import { initializeApp } from 'firebase/app';
+initializeApp(firebaseConfig);
+
 };
 firebase.initializeApp(firebaseConfig);
